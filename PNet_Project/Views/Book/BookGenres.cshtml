@@ -1,0 +1,31 @@
+﻿@model PNet_Project.Models.ViewModels.BookGenresViewModel
+
+@{
+    ViewData["Title"] = "BookGenres";
+}
+
+<h1>@Model.Book.Title</h1>
+<hr />
+
+<form asp-action="BookGenres" method="post">
+    <div class="card">
+        <div class="card-header">
+            <h2>Manage Book genres</h2>
+        </div>
+        <div class="card-body">
+            <input type="hidden" asp-for="Book.BookId" />
+            @for (int i = 0; i < Model.Genres.Count; i++)
+            {
+                <div class="form-check m-1">
+                    <input type="hidden" asp-for="@Model.Genres[i].GenreId" />
+                    <input asp-for="@Model.Genres[i].Selected" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model.Genres[i].Selected">@Model.Genres[i].GenreName</label>
+                </div>
+            }
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Update" class="btn btn-primary" />
+            <a class="btn btn-link" asp-action="BookList">Back</a>
+        </div>
+    </div>
+</form>
